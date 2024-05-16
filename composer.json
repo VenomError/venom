@@ -1,0 +1,26 @@
+{
+    "name": "venom-error/venom",
+    "description": "trying to make mvc and php cli command",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "VenomError\\Venom\\": "src/" ,
+            "VenomError\\Interface\\": "src/Helper/Interface" ,
+            "VenomError\\Model\\": "src/App/Models",
+            "VenomError\\Controller\\": "src/App/Controllers",
+            "VenomError\\Database\\": "src/Database"
+        }
+    },
+    "authors": [
+        {
+            "name": "VenomError",
+            "email": "venoms00001@gmail.com"
+        }
+    ],
+    "minimum-stability": "beta",
+    "require": {
+        "php": ">=8.2",
+        "vlucas/phpdotenv": "^5.6"
+    }
+}

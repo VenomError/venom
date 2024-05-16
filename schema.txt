@@ -1,0 +1,6 @@
+$conn = new DB() ;
+
+$conn->getConnection() ;
+$conn->getConnection()->query()->execute() ;
+
+$conn->getSqlConnecion()->query()->execute() ;

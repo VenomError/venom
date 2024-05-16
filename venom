@@ -1,0 +1,18 @@
+<?php
+use VenomError\Venom\Helper\DB;
+
+require_once __DIR__ . '/vendor/autoload.php';
+include_once __DIR__ . '/src/Helper/Handler/Error.php';
+
+
+$conn = new DB();
+$sql = "CREATE DATABASE myDBPDO";
+$result = $conn->getSqlConnection()->exec($sql);
+// use exec() because no results are returned
+
+
+if ($result) {
+    print "Successs ";
+} else {
+    print ('Fialed');
+}
