@@ -15,7 +15,7 @@ Venom MVC Framework adalah sebuah framework PHP yang powerful yang dirancang unt
 Anda dapat menginstal Venom MVC Framework via Composer:
 
 ```bash
-composer require venom-error/venom
+composer create-project venom-error/venom -s dev  
 ```
 
 ## Penggunaan
