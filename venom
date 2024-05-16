@@ -4,6 +4,7 @@ use VenomError\Venom\Helper\DB;
 
 require_once __DIR__ . '/vendor/autoload.php';
 include_once __DIR__ . '/src/Helper/Handler/Error.php';
+// include_once __DIR__ . '/src/Helpser/Handler/Error.php';
 
 if (!isset($argv)) {
     die;
@@ -20,9 +21,15 @@ if ($argc >= 2) {
     unset($argv[0]);
 
     $option = $argv[1];
-    $console = explode(":", $option);
-    $class = ucfirst($console[0]);
-    $method = $console[1];
+    if (strpos($option, ":") === false) {
+        $class = "Venom";
+        $method = $option;
+    } else {
+        $console = explode(":", $option);
+        $class = ucfirst($console[0]);
+        $method = $console[1];
+    }
+
     $path = __DIR__ . "/src/Command/" . $class . ".php";
 
     // Unset class and Method

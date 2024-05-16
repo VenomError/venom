@@ -11,7 +11,7 @@ ERROR DETECTED:
     \t|-File: $errfile
     \t|-Line: $errline
     ";
-        error_log($error_message, 3, "./public/error.log"); // Simpan pesan kesalahan ke dalam file log
+        error_log($error_message, 3, "./log/error.log"); // Simpan pesan kesalahan ke dalam file log
         print ("Error ($errno) Detetcted");
         die;
     });
