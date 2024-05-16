@@ -1,18 +1,63 @@
 <?php
+use VenomError\Venom\Command;
 use VenomError\Venom\Helper\DB;
 
 require_once __DIR__ . '/vendor/autoload.php';
 include_once __DIR__ . '/src/Helper/Handler/Error.php';
 
+if (!isset($argv)) {
+    die;
+}
 
-$conn = new DB();
-$sql = "CREATE DATABASE myDBPDO";
-$result = $conn->getSqlConnection()->exec($sql);
-// use exec() because no results are returned
+if ($argc <= 1) {
+    echo "function help() or signature() -> running()";
+    die;
+}
 
 
-if ($result) {
-    print "Successs ";
-} else {
-    print ('Fialed');
+if ($argc >= 2) {
+    // Unset Venom
+    unset($argv[0]);
+
+    $option = $argv[1];
+    $console = explode(":", $option);
+    $class = ucfirst($console[0]);
+    $method = $console[1];
+    $path = __DIR__ . "/src/Command/" . $class . ".php";
+
+    // Unset class and Method
+    unset($argv[1]);
+
+    $command = new Command();
+    $command->setPath($path);
+
+    // Cek Class is Valid
+    if (!$command->cekPath($path)) {
+        print ("Command {" . $class . "} is Not Found !!");
+        $command->exit();
+    }
+
+    // Include the Class
+    $command->include();
+
+    // set class and method
+    $command->setClass($class);
+    $command->setMethod($method);
+
+
+    // cek method on class
+    if (!method_exists($command->getClass(), $command->getMethod())) {
+        print ($command->getClass() . ":" . $command->getMethod() . " -| Command Not Found");
+        $command->exit();
+    }
+
+    // cek params if isset
+    if (isset($argv[2])) {
+        $command->setParams([$method => $argv[2]]);
+    }
+
+    $command->execute();
+
+
+
 }
